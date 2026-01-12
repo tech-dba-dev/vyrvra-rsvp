@@ -69,7 +69,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onRSVPClick }) => {
                         <span className="text-[10px] md:text-xs tracking-[0.3em] text-nude/60 uppercase">When</span>
                         <div className="flex items-center gap-4 text-lg md:text-2xl font-medium tracking-[0.1em] uppercase text-nude">
                             <Calendar className="w-5 h-5 md:w-6 md:h-6 text-nude/80 stroke-[1.5]" />
-                            <span>OCT 24 • 8PM</span>
+                            <span>JAN 24 • 4PM</span>
                         </div>
                     </div>
 
@@ -80,7 +80,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onRSVPClick }) => {
                             <div className="relative w-full aspect-[5/2] bg-[#2E0014]/40 rounded overflow-hidden">
                                 {/* Embedded Google Map */}
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8282829705535!2d-0.1499!3d51.5074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDMwJzI2LjYiTiAwwrAwOCc1OS42Ilc!5e0!3m2!1sen!2suk!4v1234567890123!5m2!1sen!2suk&style=feature:all|element:all|saturation:-100|lightness:20&style=feature:water|element:geometry|color:0x1a000b&style=feature:landscape|element:geometry|color:0x2E0014&style=feature:road|element:geometry|color:0x5e2a3b"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.0737542724914!2d-0.0745675!3d51.5239599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cb7a4a35d71%3A0x4ebb17cc57995079!2striyoga%20Shoreditch!5e0!3m2!1sen!2suk!4v1736688000000!5m2!1sen!2suk&style=feature:all|element:all|saturation:-100|lightness:20&style=feature:water|element:geometry|color:0x1a000b&style=feature:landscape|element:geometry|color:0x2E0014&style=feature:road|element:geometry|color:0x5e2a3b"
                                     width="100%"
                                     height="100%"
                                     style={{ border: 0, filter: 'grayscale(100%) brightness(0.6)' }}
@@ -93,7 +93,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onRSVPClick }) => {
                                 <div className="absolute bottom-3 left-0 right-0 z-10 flex flex-col items-center gap-2 pointer-events-none">
                                     <MapPin className="w-6 h-6 text-nude drop-shadow-lg" />
                                     <span className="text-[10px] md:text-xs tracking-widest uppercase text-nude drop-shadow-md font-semibold">
-                                        Mayfair Gallery, London
+                                        Triyoga, Shoreditch, London
                                     </span>
                                 </div>
                             </div>
