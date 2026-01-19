@@ -15,21 +15,41 @@ const KLAVIYO_LIST_ID = 'V3FZ83';
 app.use(cors());
 app.use(express.json());
 
+// Log de inicialização
+console.log('KLAVIYO_API_KEY configurada:', KLAVIYO_API_KEY ? `${KLAVIYO_API_KEY.substring(0, 10)}...` : 'NÃO DEFINIDA');
+
 // Servir arquivos estáticos do build
 app.use(express.static(path.join(__dirname, 'dist')));
+
+// Endpoint de health check
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        klaviyoKeySet: !!KLAVIYO_API_KEY,
+        klaviyoKeyPrefix: KLAVIYO_API_KEY ? KLAVIYO_API_KEY.substring(0, 10) : 'not set'
+    });
+});
 
 // API endpoint para RSVP
 app.post('/api/klaviyo-subscribe', async (req, res) => {
     try {
         const { fullName, email, guests } = req.body;
+        console.log('Recebido RSVP:', { fullName, email, guests });
 
         if (!fullName || !email) {
             return res.status(400).json({ error: 'Nome e email são obrigatórios' });
         }
 
+        if (!KLAVIYO_API_KEY) {
+            console.error('KLAVIYO_API_KEY não está definida!');
+            return res.status(500).json({ error: 'Configuração do servidor incompleta' });
+        }
+
         const nameParts = fullName.trim().split(' ');
         const firstName = nameParts[0];
         const lastName = nameParts.slice(1).join(' ') || '';
+
+        console.log('Chamando Klaviyo API...');
 
         // 1. Criar/atualizar perfil no Klaviyo
         const profileResponse = await fetch('https://a.klaviyo.com/api/profiles/', {
@@ -57,10 +77,13 @@ app.post('/api/klaviyo-subscribe', async (req, res) => {
             })
         });
 
+        console.log('Klaviyo response status:', profileResponse.status);
+
         if (!profileResponse.ok) {
             const errorData = await profileResponse.text();
-            console.error('Erro ao criar perfil:', errorData);
-            throw new Error('Falha ao criar perfil no Klaviyo');
+            console.error('Erro ao criar perfil - Status:', profileResponse.status);
+            console.error('Erro ao criar perfil - Response:', errorData);
+            throw new Error(`Falha ao criar perfil no Klaviyo: ${profileResponse.status}`);
         }
 
         const profileData = await profileResponse.json();
