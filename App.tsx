@@ -22,12 +22,31 @@ const App: React.FC = () => {
         setView('LANDING');
     };
 
-    const handleSubmitRSVP = (data: RSVPFormData) => {
+    const handleSubmitRSVP = async (data: RSVPFormData) => {
         setFormData(data);
-        // Simulate API call
-        setTimeout(() => {
+
+        try {
+            const response = await fetch('/api/klaviyo-subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                console.error('Erro ao enviar RSVP:', result);
+            } else {
+                console.log('RSVP enviado com sucesso:', result);
+            }
+
             setView('CONFIRMATION');
-        }, 1000);
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            setView('CONFIRMATION');
+        }
     };
 
     return (

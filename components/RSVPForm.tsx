@@ -30,14 +30,12 @@ export const RSVPForm: React.FC<RSVPFormProps> = ({ onClose, onSubmit }) => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validate()) {
             setIsSubmitting(true);
-            // Artificial delay to show loading state
-            setTimeout(() => {
-                onSubmit(formData);
-            }, 1500);
+            // Call parent handler which now makes API call
+            await onSubmit(formData);
         }
     };
 
