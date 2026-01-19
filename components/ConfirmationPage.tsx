@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Star, Camera, Globe } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Logo } from './Logo';
 
 export const ConfirmationPage: React.FC = () => {
@@ -63,20 +63,6 @@ export const ConfirmationPage: React.FC = () => {
                         Additional details and your exclusive QR code will be sent to your email shortly.
                     </motion.p>
                 </div>
-
-                {/* Calendar Button */}
-                <motion.div
-                    className="pb-16"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 }}
-                >
-                    <button 
-                        className="group bg-nude text-wine rounded-full px-10 py-4 shadow-[0_0_30px_-5px_rgba(234,222,218,0.2)] hover:scale-105 transition-all duration-300"
-                    >
-                        <span className="font-semibold text-[10px] md:text-xs tracking-[0.25em] uppercase">Save to Calendar</span>
-                    </button>
-                </motion.div>
 
                 {/* Footer */}
                 <motion.footer 
